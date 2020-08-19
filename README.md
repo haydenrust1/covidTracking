@@ -12,9 +12,12 @@ Web application that allows you to see your nation's Covid statistics.
 
 ## User Story
 
+
+```
 AS A concerned citizen
 I WANT to see my nation's statistics for Covid-19
 SO THAT I can plan a trip accordingly
+```
 
 ## Sketch
 
