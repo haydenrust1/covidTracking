@@ -35,17 +35,19 @@ $(document).ready(function () {
         });
 
 
-    $("#searchBtn").click(function () {
+    $("#searchBtn").on("click", function (event) {
         event.preventDefault();
         countryQuery = $(this).siblings("#country").val();
         idx = covidQuery.Countries.findIndex(x => x.Country === countryQuery);
         // console.log(covidQuery.Countries[idx]);
         TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
         NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
-        getCountryPopulation();
+        getCountryPopulation(countryQuery);
+
     })
 
     function getGlobalPop() {
+
         var settings = {
             "async": true,
             "crossDomain": true,
@@ -64,20 +66,20 @@ $(document).ready(function () {
 
     }
 
-    function getCountryPopulation() {
+    function getCountryPopulation(query) {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://world-population.p.rapidapi.com/population?country_name=" + countryQuery,
+            "url": `https://world-population.p.rapidapi.com/population?country_name=${query}`,
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "world-population.p.rapidapi.com",
                 "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
             }
         }
-
+        // console.log(settings);
         $.ajax(settings).done(function (response) {
-            console.log(response);
+            countryPopulation = response.body.population;
         });
     }
 
