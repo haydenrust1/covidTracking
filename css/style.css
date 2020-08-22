@@ -30,3 +30,7 @@ nav {
   border: none;
   border-bottom: 1px solid grey;
 }
+
+.searchBar{
+  outline: none;
+}
