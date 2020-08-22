@@ -3,9 +3,15 @@
   color: #007bff;
 }
 
-.searchBar {
-  width: 40%;
+.searchForm{
+  /* border: solid 1px red; */
+  width: 400px;
+  height: 60px;
 }
 
-.searchForm {
+.searchBar{
+  width: 85%;
+  height: 100%;
+  border: none;
+  border-bottom: 1px solid grey;
 }
