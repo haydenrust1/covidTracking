@@ -9,7 +9,9 @@ $(document).ready(function () {
     let population;
     let countryQuery;
     let covidQuery;
-    let caseCount;
+    let GlobalTotalConfirmed;
+    let TotalConfirmed;
+    let NewConfirmed;
     // let globalCount; Don't need this because it's in the variable covidQuery
     let countriesList = [];
 
@@ -27,6 +29,7 @@ $(document).ready(function () {
             $("#country").autocomplete({
                 source: countriesList
             });
+            GlobalTotalConfirmed = response.Global.TotalConfirmed;
         });
 
 
@@ -35,6 +38,9 @@ $(document).ready(function () {
         countryQuery = $(this).siblings("#country").val();
         idx = covidQuery.Countries.findIndex(x => x.Country === countryQuery);
         console.log(covidQuery.Countries[idx]);
+        TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
+        NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
+        // console.log(NewConfirmed);
     })
 
 
