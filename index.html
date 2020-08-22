@@ -62,28 +62,21 @@
                         </div>
                     </div>
             </article> -->
-            <div class="row">
-                <div class="form-group ml-auto col-md-12 ui-widget searchForm container-fluid">
-                  <form class="searchForm"> 
-                    <input
-                      class="searchBar"
-                      type="text"
-                      placeholder="Search"
-                      aria-label="Search"
-                    />
+            <article class="row form-group container-fluid justify-content-center">
+                <form class="searchForm">
+                    <input class="searchBar" id="country" type="text" placeholder="Enter country" aria-label="Search" aria-describedby="search-country">
                     <button type="submit" class="btn searchBtn">
-                      <i class="fas fa-search" aria-hidden="true"></i>
+                        <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
-                  </form>
-                </div>
-            </div>
-        
+                </form>
+            </article>
 
             <!-- Graph of Covid results for searched country -->
             <figure class="jumbotron container">
                 <div class="row">
                     <div class="col text-center">
-                        <h1>Result graph goes here</h1>
+                        <div id="global-chart"></div>
+                        <div id="country-chart"></div>
                         <h6>
                             (Disabled by default, appears when search parameters are entered)
                         </h6>
@@ -155,6 +148,7 @@
         <i>&copy; 2020 All rights reserved</i>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
