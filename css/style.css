@@ -18,13 +18,15 @@ nav {
   color: #007bff;
 }
 
-.searchBar {
-  width: 50vw;
-  margin: auto;
-  border: 0px;
-  border-bottom: 1px solid black;
+.searchForm {
+  /* border: solid 1px red; */
+  width: 400px;
+  height: 60px;
 }
 
-.searchForm {
-  /* border: 1px solid red; */
+.searchBar {
+  width: 85%;
+  height: 100%;
+  border: none;
+  border-bottom: 1px solid grey;
 }

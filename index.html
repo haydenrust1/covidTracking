@@ -4,22 +4,11 @@
     <title>COVID-19 Tracker</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-    <script
-      src="https://kit.fontawesome.com/f38c77de34.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/f38c77de34.js" crossorigin="anonymous"></script>
 
   <body>
     <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
@@ -27,15 +16,21 @@
     </nav>
 
     <main>
-      <div class="section">
-        <!-- Information on what Covid is -->
-        <div class="row">
-          <section class="jumbotron container-fluid">
-            <div class="col-md-12 text-center virusInfo">
-              <h1>GENERAL INFO ABOUT COVID-19</h1>
-            </div>
-          </section>
-        </div>
+        <div class="section">
+            <!-- Information on what Covid is -->
+            <section class="jumbotron container-fluid">
+                <div class="row">
+                    <div class="col-md-12 text-center virusInfo">
+                        <h1>GENERAL INFO ABOUT COVID-19</h1>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search form area -->
+            <!-- <article class="search-form container-fluid">
+                    <div class="row">
+                        <div class="form-group col-md-3 ui-widget searchForm">
+                            <form>
 
         <!-- Search form area -->
         <div class="row h-100">
@@ -54,18 +49,31 @@
           </div>
         </div>
 
-        <!-- Graph of Covid results for searched country -->
-        <div class="row">
-          <figure class="jumbotron container">
-            <div class="col text-center">
-              <h1>Result graph goes here</h1>
-              <h6>
-                (Disabled by default, appears when search parameters are
-                entered)
-              </h6>
-            </div>
-          </figure>
-        </div>
+                        </div>
+                    </div>
+            </article> -->
+            <article class="row form-group container-fluid justify-content-center">
+                <form class="searchForm">
+                    <input class="searchBar" id="country" type="text" placeholder="Enter country" aria-label="Search"
+                        aria-describedby="search-country">
+                    <button type="submit" class="btn searchBtn">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </article>
+
+            <!-- Graph of Covid results for searched country -->
+            <figure class="jumbotron container">
+                <div class="row">
+                    <div class="col text-center">
+                        <canvas id="global-chart" width="640" height="480"></canvas>
+                        <canvas id="country-chart" width="640" height="480"></canvas>
+                        <h6>
+                            (Disabled by default, appears when search parameters are entered)
+                        </h6>
+                    </div>
+                </div>
+            </figure>
 
         <div class="card-deck">
           <div class="card">
@@ -131,20 +139,15 @@
       <i>&copy; 2020 All rights reserved</i>
     </footer>
 
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/script.js"></script>
