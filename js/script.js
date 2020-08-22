@@ -7,6 +7,7 @@
 $(document).ready(function () {
     //COVID 19 API
     let worldPopulation;
+    let countryPopulation;
     let countryQuery;
     let covidQuery;
     let GlobalTotalConfirmed;
@@ -34,17 +35,19 @@ $(document).ready(function () {
         });
 
 
-    $("#searchBtn").click(function () {
+    $("#searchBtn").on("click", function (event) {
         event.preventDefault();
         countryQuery = $(this).siblings("#country").val();
         idx = covidQuery.Countries.findIndex(x => x.Country === countryQuery);
         // console.log(covidQuery.Countries[idx]);
         TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
         NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
-        // console.log(NewConfirmed);
+        getCountryPopulation(countryQuery);
+
     })
 
     function getGlobalPop() {
+
         var settings = {
             "async": true,
             "crossDomain": true,
@@ -58,9 +61,26 @@ $(document).ready(function () {
 
         $.ajax(settings).done(function (response) {
             worldPopulation = response.body.world_population;
-            // console.log(response.body.world_population);
+            // console.log(response);
         });
 
+    }
+
+    function getCountryPopulation(query) {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": `https://world-population.p.rapidapi.com/population?country_name=${query}`,
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "world-population.p.rapidapi.com",
+                "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
+            }
+        }
+        // console.log(settings);
+        $.ajax(settings).done(function (response) {
+            countryPopulation = response.body.population;
+        });
     }
 
 
