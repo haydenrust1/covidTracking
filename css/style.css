@@ -1,7 +1,23 @@
+/**************************
+ COLOR SCHEME:
+#11296B
+#00509D
+#EDEDED
+#FFDB57
+#FFCB05
+****************************/
+nav {
+  background: linear-gradient(to right, #00509d, #ededed, #ffdb57);
+}
+
+#nav {
+  color: white;
+}
+
 .searchBtn {
-  display: inline;
   color: #007bff;
 }
+
 
 .searchForm{
   /* border: solid 1px red; */
