@@ -6,10 +6,12 @@
 
 $(document).ready(function () {
     //COVID 19 API
-    let population;
+    let worldPopulation;
     let countryQuery;
     let covidQuery;
-    let caseCount;
+    let GlobalTotalConfirmed;
+    let TotalConfirmed;
+    let NewConfirmed;
     // let globalCount; Don't need this because it's in the variable covidQuery
     let countriesList = [];
 
@@ -27,6 +29,8 @@ $(document).ready(function () {
             $("#country").autocomplete({
                 source: countriesList
             });
+            getGlobalPop();
+            GlobalTotalConfirmed = response.Global.TotalConfirmed;
         });
 
 
@@ -34,8 +38,30 @@ $(document).ready(function () {
         event.preventDefault();
         countryQuery = $(this).siblings("#country").val();
         idx = covidQuery.Countries.findIndex(x => x.Country === countryQuery);
-        console.log(covidQuery.Countries[idx]);
+        // console.log(covidQuery.Countries[idx]);
+        TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
+        NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
+        // console.log(NewConfirmed);
     })
+
+    function getGlobalPop() {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://world-population.p.rapidapi.com/worldpopulation",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "world-population.p.rapidapi.com",
+                "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            worldPopulation = response.body.world_population;
+            // console.log(response.body.world_population);
+        });
+
+    }
 
 
     // function countryCovid(country) {
