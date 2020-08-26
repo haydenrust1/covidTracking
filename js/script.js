@@ -61,15 +61,23 @@ $(document).ready(function () {
     getCountryPopulation(countryQuery);
   });
 
-  $('#searchBtn').on('click', function (event) {
-    event.preventDefault();
-    countryQuery = $(this).siblings('#country').val();
-    idx = covidQuery.Countries.findIndex((x) => x.Country === countryQuery);
-    // console.log(covidQuery.Countries[idx]);
-    TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
-    NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
-    getCountryPopulation(countryQuery);
-  });
+    $("#searchBtn").on("click", function (event) {
+        event.preventDefault();
+        countryQuery = $(this).siblings("#country").val();
+        idx = covidQuery.Countries.findIndex(x => x.Country === countryQuery);
+        // console.log(covidQuery.Countries[idx]);
+        TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
+        NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
+        GlobalNewConfirmed = covidQuery.Global.NewConfirmed;
+        GlobalTotalConfirmed = covidQuery.Global.TotalConfirmed;
+        // Not alike data
+        // graphData("global-chart", [TotalConfirmed, NewConfirmed], ["Country Total Confirmed", "Country New Confirmed"]);
+        // graphData("country-chart", [GlobalNewConfirmed, GlobalTotalConfirmed], ["Global New Confirmed", "Global Total Confirmed"]);
+        // Alike data
+        graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed], ["Country New Confirmed", "Global New Confirmed"]);
+        graphData("country-chart", [NewConfirmed, GlobalNewConfirmed], ["Country Total Confirmed", "Global Total Confirmed"]);
+        getCountryPopulation(countryQuery);
+    })
 
   function getGlobalPop() {
     var settings = {
