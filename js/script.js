@@ -9,12 +9,14 @@ $(document).ready(function () {
     let worldPopulation;
     let countryPopulation;
     let countryQuery;
+    let countryCode;
     let covidQuery;
     let GlobalTotalConfirmed;
     let TotalConfirmed;
     let NewConfirmed;
     // let globalCount; Don't need this because it's in the variable covidQuery
     let countriesList = [];
+    let countryCodeList = [];
 
     // call to Covid api
     $.ajax({
@@ -23,16 +25,18 @@ $(document).ready(function () {
         })
         // After the data comes back from the API
         .then(function (response) {
-            console.log(response);
+            // console.log(response);
             covidQuery = response;
             for (var i = 0; i < response.Countries.length; i++) {
-                countriesList.push(response.Countries[i].Country)
+                countriesList.push(response.Countries[i].Country);
+                countryCodeList.push(response.Countries[i].CountryCode);
             }
 
             $("#country").autocomplete({
                 source: countriesList
             });
-            getGlobalPop();
+            // console.log(countriesList);
+            // getGlobalPop();
             GlobalTotalConfirmed = response.Global.TotalConfirmed;
         });
 
@@ -42,6 +46,7 @@ $(document).ready(function () {
         countryQuery = $(this).siblings("#country").val();
         idx = covidQuery.Countries.findIndex(x => x.Country === countryQuery);
         TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
+        countryCode = covidQuery.Countries[idx].CountryCode;
         NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
         GlobalNewConfirmed = covidQuery.Global.NewConfirmed;
         GlobalTotalConfirmed = covidQuery.Global.TotalConfirmed;
@@ -51,50 +56,53 @@ $(document).ready(function () {
         // Alike data
         graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed], ["Country New Confirmed", "Global New Confirmed"]);
         graphData("country-chart", [NewConfirmed, GlobalNewConfirmed], ["Country Total Confirmed", "Global Total Confirmed"]);
-        getCountryPopulation(countryQuery);
+        getCountryPopulation(countryCode);
 
     })
 
     // Call to get global population
-    function getGlobalPop() {
+    // function getGlobalPop() {
 
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://world-population.p.rapidapi.com/worldpopulation",
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "world-population.p.rapidapi.com",
-                "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
-            }
-        }
-        // After the data comes back from the API
-        $.ajax(settings).done(function (response) {
-            worldPopulation = response.body.world_population;
-            // console.log(response);
-        });
+    //     var settings = {
+    //         "async": true,
+    //         "crossDomain": true,
+    //         "url": "https://world-population.p.rapidapi.com/worldpopulation",
+    //         "method": "GET",
+    //         "headers": {
+    //             "x-rapidapi-host": "world-population.p.rapidapi.com",
+    //             "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
+    //         }
+    //     }
+    //     // After the data comes back from the API
+    //     $.ajax(settings).done(function (response) {
+    //         worldPopulation = response.body.world_population;
+    //         // console.log(response);
+    //     });
 
-    }
-
+    // }
 
     // Call to get country population from query
     function getCountryPopulation(query) {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": `https://world-population.p.rapidapi.com/population?country_name=${query}`,
+            "url": "https://world-geo-data.p.rapidapi.com/countries/" + query + "?language=en%252Cru%252Czh%252Ces%252Car%252Cfr%252Cfa%252Cja%252Cpl%252Cit%252Cpt%252Cde&format=json",
             "method": "GET",
             "headers": {
-                "x-rapidapi-host": "world-population.p.rapidapi.com",
+                "x-rapidapi-host": "world-geo-data.p.rapidapi.com",
                 "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
             }
         }
-        // After the data comes back from the API
+
         $.ajax(settings).done(function (response) {
-            countryPopulation = response.body.population;
+            countryPopulation = response.population;
+            console.log(response.population);
         });
     }
 
+
+
+    // graph display
     function graphData(id, data, names) {
         var ctx = document.getElementById(id).getContext('2d');
         var myChart = new Chart(ctx, {
@@ -163,33 +171,4 @@ $(document).ready(function () {
         });
     }
 
-<<<<<<< HEAD
-
-=======
-  /************************
-   * BULMA BUTTONS FOR HTML
-   ************************/
-    $('.activate').click(function () {
-    $('.modal').addClass('is-active');
-    });
-
-    $('.modal-close').click(function () {
-    $('.modal').removeClass('is-active');
-    });
-
-    // function countryCovid(country) {
-    //     for (var i = 0; i < 4; i++) {
-    //         country = country.replace(" ", "-");
-    //     }
-    //     console.log(country);
-    //     $.ajax({
-    //             url: `https://api.covid19api.com/country/${country}?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z`,
-    //             method: 'GET',
-    //         })
-    //         // After the data comes back from the API
-    //         .then(function (response) {
-    //             console.log(response);
-    //         });
-    // }
->>>>>>> 0febe4d6c470f73a42421762bef1c3c8f65b1a7a
 });
