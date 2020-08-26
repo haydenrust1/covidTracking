@@ -16,6 +16,7 @@ $(document).ready(function () {
     // let globalCount; Don't need this because it's in the variable covidQuery
     let countriesList = [];
 
+    // call to Covid api
     $.ajax({
             url: 'https://api.covid19api.com/summary',
             method: 'GET',
@@ -34,18 +35,18 @@ $(document).ready(function () {
             GlobalTotalConfirmed = response.Global.TotalConfirmed;
         });
 
-
+    // On search button click
     $("#searchBtn").on("click", function (event) {
         event.preventDefault();
         countryQuery = $(this).siblings("#country").val();
         idx = covidQuery.Countries.findIndex(x => x.Country === countryQuery);
-        // console.log(covidQuery.Countries[idx]);
         TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
         NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
         getCountryPopulation(countryQuery);
 
     })
 
+    // Call to get global population
     function getGlobalPop() {
 
         var settings = {
@@ -58,7 +59,7 @@ $(document).ready(function () {
                 "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
             }
         }
-
+        // After the data comes back from the API
         $.ajax(settings).done(function (response) {
             worldPopulation = response.body.world_population;
             // console.log(response);
@@ -66,6 +67,8 @@ $(document).ready(function () {
 
     }
 
+
+    // Call to get country population from query
     function getCountryPopulation(query) {
         var settings = {
             "async": true,
@@ -77,7 +80,7 @@ $(document).ready(function () {
                 "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
             }
         }
-        // console.log(settings);
+        // After the data comes back from the API
         $.ajax(settings).done(function (response) {
             countryPopulation = response.body.population;
         });
@@ -122,8 +125,10 @@ $(document).ready(function () {
         }
     });
 
+    // get news on page load
     getNews();
 
+    // Call to Covid news api
     function getNews() {
         var settings = {
             "async": true,
@@ -135,29 +140,18 @@ $(document).ready(function () {
                 "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
             }
         }
+        // After the data comes back from the API
         $.ajax(settings).done(function (response) {
             for (var i = 0; i < 4; i++) {
                 let randNum = Math.floor(Math.random() * 50);
+                // Populate articles and links
                 $(".card .card-body .card-title").eq(i).html(response.articles[randNum].title);
                 $(".card .card-body .card-text").eq(i).html(response.articles[randNum].summary);
                 $(".card .card-body .btn-primary").eq(i).attr("href", response.articles[randNum].link);
             }
-            console.log(response.articles);
+
         });
     }
 
-    // function countryCovid(country) {
-    //     for (var i = 0; i < 4; i++) {
-    //         country = country.replace(" ", "-");
-    //     }
-    //     console.log(country);
-    //     $.ajax({
-    //             url: `https://api.covid19api.com/country/${country}?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z`,
-    //             method: 'GET',
-    //         })
-    //         // After the data comes back from the API
-    //         .then(function (response) {
-    //             console.log(response);
-    //         });
-    // }
+
 });
