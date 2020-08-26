@@ -45,13 +45,13 @@ $(document).ready(function () {
         NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
         GlobalNewConfirmed = covidQuery.Global.NewConfirmed;
         GlobalTotalConfirmed = covidQuery.Global.TotalConfirmed;
-        data = [TotalConfirmed, NewConfirmed, GlobalNewConfirmed, GlobalTotalConfirmed];
-        names = ["TotalConfirmed", "NewConfirmed", "GlobalNewConfirmed", "GlobalTotalConfirmed"];
-        console.log(data);
-        graphData("global-chart", data, names);
-
+        // Not alike data
+        // graphData("global-chart", [TotalConfirmed, NewConfirmed], ["Country Total Confirmed", "Country New Confirmed"]);
+        // graphData("country-chart", [GlobalNewConfirmed, GlobalTotalConfirmed], ["Global New Confirmed", "Global Total Confirmed"]);
+        // Alike data
+        graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed], ["Country Total Confirmed", "Global New Confirmed"]);
+        graphData("country-chart", [NewConfirmed, GlobalNewConfirmed], ["Country New Confirmed", "Global Total Confirmed"]);
         getCountryPopulation(countryQuery);
-
     })
 
     function getGlobalPop() {
