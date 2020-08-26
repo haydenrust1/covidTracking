@@ -28,3 +28,8 @@ nav {
 .searchBar {
   outline: none;
 }
+
+.virusInfo {
+  text-align: center;
+  /* list-style-type: none; */
+}

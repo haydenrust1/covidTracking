@@ -23,6 +23,7 @@ $(document).ready(function () {
         })
         // After the data comes back from the API
         .then(function (response) {
+            console.log(response);
             covidQuery = response;
             for (var i = 0; i < response.Countries.length; i++) {
                 countriesList.push(response.Countries[i].Country)
@@ -42,6 +43,14 @@ $(document).ready(function () {
         idx = covidQuery.Countries.findIndex(x => x.Country === countryQuery);
         TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
         NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
+        GlobalNewConfirmed = covidQuery.Global.NewConfirmed;
+        GlobalTotalConfirmed = covidQuery.Global.TotalConfirmed;
+        // Not alike data
+        // graphData("global-chart", [TotalConfirmed, NewConfirmed], ["Country Total Confirmed", "Country New Confirmed"]);
+        // graphData("country-chart", [GlobalNewConfirmed, GlobalTotalConfirmed], ["Global New Confirmed", "Global Total Confirmed"]);
+        // Alike data
+        graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed], ["Country New Confirmed", "Global New Confirmed"]);
+        graphData("country-chart", [NewConfirmed, GlobalNewConfirmed], ["Country Total Confirmed", "Global Total Confirmed"]);
         getCountryPopulation(countryQuery);
 
     })
@@ -86,44 +95,45 @@ $(document).ready(function () {
         });
     }
 
-
-    var ctx = document.getElementById('global-chart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+    function graphData(id, data, names) {
+        var ctx = document.getElementById(id).getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [{
+                    label: '# of Votes',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
                 }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
-        }
-    });
+        });
+    }
 
     // get news on page load
     getNews();
@@ -153,5 +163,33 @@ $(document).ready(function () {
         });
     }
 
+<<<<<<< HEAD
 
+=======
+  /************************
+   * BULMA BUTTONS FOR HTML
+   ************************/
+    $('.activate').click(function () {
+    $('.modal').addClass('is-active');
+    });
+
+    $('.modal-close').click(function () {
+    $('.modal').removeClass('is-active');
+    });
+
+    // function countryCovid(country) {
+    //     for (var i = 0; i < 4; i++) {
+    //         country = country.replace(" ", "-");
+    //     }
+    //     console.log(country);
+    //     $.ajax({
+    //             url: `https://api.covid19api.com/country/${country}?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z`,
+    //             method: 'GET',
+    //         })
+    //         // After the data comes back from the API
+    //         .then(function (response) {
+    //             console.log(response);
+    //         });
+    // }
+>>>>>>> 0febe4d6c470f73a42421762bef1c3c8f65b1a7a
 });
