@@ -22,6 +22,7 @@ $(document).ready(function () {
         })
         // After the data comes back from the API
         .then(function (response) {
+            console.log(response);
             covidQuery = response;
             for (var i = 0; i < response.Countries.length; i++) {
                 countriesList.push(response.Countries[i].Country)
@@ -42,6 +43,13 @@ $(document).ready(function () {
         // console.log(covidQuery.Countries[idx]);
         TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
         NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
+        GlobalNewConfirmed = covidQuery.Global.NewConfirmed;
+        GlobalTotalConfirmed = covidQuery.Global.TotalConfirmed;
+        data = [TotalConfirmed, NewConfirmed, GlobalNewConfirmed, GlobalTotalConfirmed];
+        names = ["TotalConfirmed", "NewConfirmed", "GlobalNewConfirmed", "GlobalTotalConfirmed"];
+        console.log(data);
+        graphData("global-chart", data, names);
+
         getCountryPopulation(countryQuery);
 
     })
@@ -83,44 +91,45 @@ $(document).ready(function () {
         });
     }
 
-
-    var ctx = document.getElementById('global-chart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+    function graphData(id, data, names) {
+        var ctx = document.getElementById(id).getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [{
+                    label: '# of Votes',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
                 }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
-        }
-    });
+        });
+    }
 
     // function countryCovid(country) {
     //     for (var i = 0; i < 4; i++) {
