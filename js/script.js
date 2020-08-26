@@ -130,19 +130,4 @@ $(document).ready(function () {
             }
         });
     }
-
-    // function countryCovid(country) {
-    //     for (var i = 0; i < 4; i++) {
-    //         country = country.replace(" ", "-");
-    //     }
-    //     console.log(country);
-    //     $.ajax({
-    //             url: `https://api.covid19api.com/country/${country}?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z`,
-    //             method: 'GET',
-    //         })
-    //         // After the data comes back from the API
-    //         .then(function (response) {
-    //             console.log(response);
-    //         });
-    // }
 });
