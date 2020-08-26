@@ -22,6 +22,7 @@ $(document).ready(function () {
   })
     // After the data comes back from the API
     .then(function (response) {
+      console.log(response);
       covidQuery = response;
       for (var i = 0; i < response.Countries.length; i++) {
         countriesList.push(response.Countries[i].Country);
@@ -33,6 +34,32 @@ $(document).ready(function () {
       getGlobalPop();
       GlobalTotalConfirmed = response.Global.TotalConfirmed;
     });
+
+  $('#searchBtn').on('click', function (event) {
+    event.preventDefault();
+    countryQuery = $(this).siblings('#country').val();
+    idx = covidQuery.Countries.findIndex((x) => x.Country === countryQuery);
+    // console.log(covidQuery.Countries[idx]);
+    TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
+    NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
+    GlobalNewConfirmed = covidQuery.Global.NewConfirmed;
+    GlobalTotalConfirmed = covidQuery.Global.TotalConfirmed;
+    // Not alike data
+    // graphData("global-chart", [TotalConfirmed, NewConfirmed], ["Country Total Confirmed", "Country New Confirmed"]);
+    // graphData("country-chart", [GlobalNewConfirmed, GlobalTotalConfirmed], ["Global New Confirmed", "Global Total Confirmed"]);
+    // Alike data
+    graphData(
+      'global-chart',
+      [TotalConfirmed, GlobalTotalConfirmed],
+      ['Country Total Confirmed', 'Global New Confirmed']
+    );
+    graphData(
+      'country-chart',
+      [NewConfirmed, GlobalNewConfirmed],
+      ['Country New Confirmed', 'Global Total Confirmed']
+    );
+    getCountryPopulation(countryQuery);
+  });
 
   $('#searchBtn').on('click', function (event) {
     event.preventDefault();
@@ -131,6 +158,80 @@ $(document).ready(function () {
   $('.modal-close').click(function () {
     $('.modal').removeClass('is-active');
   });
+  function graphData(id, data, names) {
+    var ctx = document.getElementById(id).getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: names,
+        datasets: [
+          {
+            label: '# of Votes',
+            data: data,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
+    });
+  }
+
+  getNews();
+
+  function getNews() {
+    var settings = {
+      async: true,
+      crossDomain: true,
+      url:
+        'https://covid-19-news.p.rapidapi.com/v1/covid?lang=en&media=True&q=covid',
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': 'covid-19-news.p.rapidapi.com',
+        'x-rapidapi-key': '7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5',
+      },
+    };
+    $.ajax(settings).done(function (response) {
+      for (var i = 0; i < 4; i++) {
+        let randNum = Math.floor(Math.random() * 50);
+        $('.card .card-body .card-title')
+          .eq(i)
+          .html(response.articles[randNum].title);
+        $('.card .card-body .card-text')
+          .eq(i)
+          .html(response.articles[randNum].summary);
+        $('.card .card-body .btn-primary')
+          .eq(i)
+          .attr('href', response.articles[randNum].link);
+      }
+      console.log(response.articles);
+    });
+  }
 
   // function countryCovid(country) {
   //     for (var i = 0; i < 4; i++) {
