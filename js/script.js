@@ -49,8 +49,8 @@ $(document).ready(function () {
         // graphData("global-chart", [TotalConfirmed, NewConfirmed], ["Country Total Confirmed", "Country New Confirmed"]);
         // graphData("country-chart", [GlobalNewConfirmed, GlobalTotalConfirmed], ["Global New Confirmed", "Global Total Confirmed"]);
         // Alike data
-        graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed], ["Country Total Confirmed", "Global New Confirmed"]);
-        graphData("country-chart", [NewConfirmed, GlobalNewConfirmed], ["Country New Confirmed", "Global Total Confirmed"]);
+        graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed], ["Country New Confirmed", "Global New Confirmed"]);
+        graphData("country-chart", [NewConfirmed, GlobalNewConfirmed], ["Country Total Confirmed", "Global Total Confirmed"]);
         getCountryPopulation(countryQuery);
     })
 
