@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
     //COVID 19 API
-    let worldPopulation;
+    let worldPopulation = 7794798739;
     let countryPopulation;
     let countryQuery;
     let countryCode;
@@ -36,7 +36,7 @@ $(document).ready(function () {
                 source: countriesList
             });
 
-            getGlobalPop();
+            // getGlobalPop(); // disabled to hardcode population
 
             GlobalTotalConfirmed = response.Global.TotalConfirmed;
         });
@@ -62,32 +62,32 @@ $(document).ready(function () {
     })
 
     // Call to get global population
-    function getGlobalPop() {
-        var worldPopulation;
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://world-population.p.rapidapi.com/worldpopulation",
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "world-population.p.rapidapi.com",
-                "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
-            }
-        }
-        $.ajax(settings)
-            .done(function (response) {
-                worldPopulation = response.body.world_population;
-                console.log('success');
-            })
-            .fail(function () {
-                worldPopulation = 7794798739;
-                console.log('fail')
-            })
-            .always(function () {
-                console.log('always')
-                console.log(worldPopulation)
-            });
-    }
+    // function getGlobalPop() {
+    //     var worldPopulation;
+    //     var settings = {
+    //         "async": true,
+    //         "crossDomain": true,
+    //         "url": "https://world-population.p.rapidapi.com/worldpopulation",
+    //         "method": "GET",
+    //         "headers": {
+    //             "x-rapidapi-host": "world-population.p.rapidapi.com",
+    //             "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
+    //         }
+    //     }
+    //     $.ajax(settings)
+    //         .done(function (response) {
+    //             worldPopulation = response.body.world_population;
+    //             console.log('success');
+    //         })
+    //         .fail(function () {
+    //             worldPopulation = 7794798739;
+    //             console.log('fail')
+    //         })
+    //         .always(function () {
+    //             console.log('always')
+    //             console.log(worldPopulation)
+    //         });
+    // }
 
 
 
