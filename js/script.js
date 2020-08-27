@@ -183,4 +183,15 @@ $(document).ready(function () {
         });
     }
 
+    /***************************************
+     * Button control for Symptom description
+     ***************************************/
+    $('.activate').on('click', function() {
+        $('.modal').addClass('is-active');
+    });
+    $('.modal-close').on('click', function() {
+        $('.modal').removeClass('is-active');
+    });
+
+
 });
