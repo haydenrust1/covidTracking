@@ -35,6 +35,9 @@ SO THAT I can plan a trip accordingly
 
 - Css Framework:
 
+  - [Bootstrap](https://getbootstrap.com/)
+  - [Bulma](https://bulma.io/)
+
 ## Breakdown of Tasks
 
 Individual tasks will be delegated as they arise to allow each member to work on all aspects of the project.

@@ -9,6 +9,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/f38c77de34.js" crossorigin="anonymous"></script>
 
 <body>
@@ -17,97 +18,127 @@
     </nav>
 
     <main>
-        <div class="section">
-            <!-- Information on what Covid is -->
-            <section class="jumbotron container-fluid">
-                <div class="row">
-                    <div class="col-md-12 text-center virusInfo">
-                        <h1>GENERAL INFO ABOUT COVID-19</h1>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Search form area -->
-            <article class="row form-group container-fluid justify-content-center">
-                <!-- <form class="searchForm"> -->
-                <input class="searchBar" id="country" type="text" placeholder="Enter country" aria-label="Search"
-                    aria-describedby="search-country">
-                <button id="searchBtn" class="btn searchBtn">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                </button>
-                <!-- </form> -->
-            </article>
-
-            <!-- Graph of Covid results for searched country -->
-            <figure class="jumbotron container">
-                <div class="row">
-                    <div class="col text-center">
-                        <canvas id="global-chart" width="640" height="480"></canvas>
-                        <canvas id="country-chart" width="640" height="480"></canvas>
-                        <h6>
-                            (Disabled by default, appears when search parameters are entered)
-                        </h6>
-                    </div>
-                </div>
-            </figure>
-
-            <div class="card-deck">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">News 1</h5>
-                        <p class="card-text">
-                            This is a wider card with supporting text below as a natural
-                            lead-in to additional content. This content is a little bit
-                            longer.
-                        </p>
-                        <a href="#" class="btn btn-primary">Read more</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">News 2</h5>
-                        <p class="card-text">
-                            This card has supporting text below as a natural lead-in to
-                            additional content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Read more</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">News 3</h5>
-                        <p class="card-text">
-                            This is a wider card with supporting text below as a natural
-                            lead-in to additional content. This card has even longer content
-                            than the first to show that equal height action.
-                        </p>
-                        <a href="#" class="btn btn-primary">Read more</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">News 4</h5>
-                        <p class="card-text">
-                            This is a wider card with supporting text below as a natural
-                            lead-in to additional content. This card has even longer content
-                            than the first to show that equal height action.
-                        </p>
-                        <a href="#" class="btn btn-primary">Read more</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+        <section class="hero is-light">
+            <div class="hero-body">
+                <div class="container virusInfo">
+                    <h1 class="title">Covid-19</h1>
+                    <button class="button is-danger activate">Symptoms</button>
+                    <div class="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            <div class="box">
+                                <article class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-64x64">
+                                            <img src="https://fertilitynetworkuk.org/wp-content/uploads/2020/03/cdc-k0KRNtqcjfw-unsplash-1-128x128.jpg"
+                                                alt="Image">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p><strong>Symptoms Include:</strong><br>
+                                                <ul>
+                                                    <li>Fever/chills</li>
+                                                    <li>Cough</li>
+                                                    <li>Difficulty breathing</li>
+                                                    <li>Fatigue</li>
+                                                    <li>Muscle aches</li>
+                                                    <li>loss of taste or smell</li>
+                                                    <li>Sore throat</li>
+                                                    <li>Congestion or runny nose</li>
+                                                    <li>Nausea or vomiting</li>
+                                                    <li>Diarrhea</li>
+                                                </ul>
+                                            </p>
+                                        </div>
+                                </article>
+                            </div>
+                        </div>
+                        <button class="modal-close is-large" aria-label="close"></button>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Search form area -->
+        <article class="row form-group container-fluid justify-content-center">
+            <!-- <form class="searchForm"> -->
+            <input class="searchBar" id="country" type="text" placeholder="Enter country" aria-label="Search"
+                aria-describedby="search-country">
+            <button id="searchBtn" class="btn searchBtn">
+                <i class="fas fa-search" aria-hidden="true"></i>
+            </button>
+            <!-- </form> -->
+        </article>
+
+        <!-- Graph of Covid results for searched country -->
+        <figure class="jumbotron container">
+            <div class="row">
+                <div class="col text-center">
+                    <canvas id="global-chart" width="640" height="480"></canvas>
+                    <!-- <canvas id="country-chart" width="640" height="480"></canvas> -->
+
+                </div>
+            </div>
+        </figure>
+
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">News 1</h5>
+                    <p class="card-text">
+                        This is a wider card with supporting text below as a natural
+                        lead-in to additional content. This content is a little bit
+                        longer.
+                    </p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">News 2</h5>
+                    <p class="card-text">
+                        This card has supporting text below as a natural lead-in to
+                        additional content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">News 3</h5>
+                    <p class="card-text">
+                        This is a wider card with supporting text below as a natural
+                        lead-in to additional content. This card has even longer content
+                        than the first to show that equal height action.
+                    </p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">News 4</h5>
+                    <p class="card-text">
+                        This is a wider card with supporting text below as a natural
+                        lead-in to additional content. This card has even longer content
+                        than the first to show that equal height action.
+                    </p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
 
