@@ -37,3 +37,7 @@ nav {
 .news {
   margin-top: 10px;
 }
+
+.card h5 {
+  font-weight: bold;
+}
