@@ -35,8 +35,9 @@ $(document).ready(function () {
             $("#country").autocomplete({
                 source: countriesList
             });
-            // console.log(countriesList);
-            // getGlobalPop();
+
+            getGlobalPop();
+
             GlobalTotalConfirmed = response.Global.TotalConfirmed;
         });
 
@@ -61,25 +62,36 @@ $(document).ready(function () {
     })
 
     // Call to get global population
-    // function getGlobalPop() {
+    function getGlobalPop() {
+        var worldPopulation;
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://world-population.p.rapidapi.com/worldpopulation",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "world-population.p.rapidapi.com",
+                "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
+            }
+        }
+        $.ajax(settings)
+            .done(function (response) {
+                worldPopulation = response.body.world_population;
+                console.log('success');
+            })
+            .fail(function () {
+                worldPopulation = 7794798739;
+                console.log('fail')
+            })
+            .always(function () {
+                console.log('always')
+                console.log(worldPopulation)
+            });
+    }
 
-    //     var settings = {
-    //         "async": true,
-    //         "crossDomain": true,
-    //         "url": "https://world-population.p.rapidapi.com/worldpopulation",
-    //         "method": "GET",
-    //         "headers": {
-    //             "x-rapidapi-host": "world-population.p.rapidapi.com",
-    //             "x-rapidapi-key": "7890d205b1msh01e2a11ec28f854p1c50e9jsn12a3a11721e5"
-    //         }
-    //     }
-    //     // After the data comes back from the API
-    //     $.ajax(settings).done(function (response) {
-    //         worldPopulation = response.body.world_population;
-    //         // console.log(response);
-    //     });
 
-    // }
+
+
 
     // Call to get country population from query
     function getCountryPopulation(query) {
@@ -96,7 +108,7 @@ $(document).ready(function () {
 
         $.ajax(settings).done(function (response) {
             countryPopulation = response.population;
-            console.log(response.population);
+
         });
     }
 
