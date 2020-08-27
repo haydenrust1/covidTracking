@@ -133,6 +133,10 @@ $(document).ready(function () {
 
     getNews();
 
+    function truncate(text, word_count) {
+        return text.split(" ").slice(0, word_count).join(" ");
+    }
+
     function getNews() {
         var settings = {
             "async": true,
@@ -148,7 +152,7 @@ $(document).ready(function () {
             for (var i = 0; i < 4; i++) {
                 let randNum = Math.floor(Math.random() * 50);
                 $(".card .card-body .card-title").eq(i).html(response.articles[randNum].title);
-                $(".card .card-body .card-text").eq(i).html(response.articles[randNum].summary);
+                $(".card .card-body .card-text").eq(i).html(truncate(response.articles[randNum].summary, 50) + "...");
                 $(".card .card-body .btn-primary").eq(i).attr("href", response.articles[randNum].link);
             }
             console.log(response.articles);
