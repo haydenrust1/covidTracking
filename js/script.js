@@ -179,12 +179,13 @@ $(document).ready(function () {
         }
         // After the data comes back from the API
         $.ajax(settings).done(function (response) {
+            let randNum = Math.floor(Math.random() * 46);
+
             for (var i = 0; i < 4; i++) {
-                let randNum = Math.floor(Math.random() * 50);
                 // Populate articles and links
-                $(".card .card-body .card-title").eq(i).html(response.articles[randNum].title);
-                $(".card .card-body .card-text").eq(i).html(truncate(response.articles[randNum].summary, 50) + "...");
-                $(".card .card-body .btn-primary").eq(i).attr("href", response.articles[randNum].link);
+                $(".card .card-body .card-title").eq(i).html(response.articles[randNum + i].title);
+                $(".card .card-body .card-text").eq(i).html(truncate(response.articles[randNum + i].summary, 50) + "...");
+                $(".card .card-body .btn-primary").eq(i).attr("href", response.articles[randNum + i].link);
             }
 
         });
