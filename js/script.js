@@ -12,6 +12,7 @@ $(document).ready(function () {
     let countryCode;
     let covidQuery;
     let GlobalTotalConfirmed;
+    let GlobalNewConfirmed;
     let TotalConfirmed;
     let NewConfirmed;
     // let globalCount; Don't need this because it's in the variable covidQuery
@@ -37,8 +38,10 @@ $(document).ready(function () {
             });
 
             // getGlobalPop(); // disabled to hardcode population
-
+            GlobalNewConfirmed = response.Global.NewConfirmed;
             GlobalTotalConfirmed = response.Global.TotalConfirmed;
+            graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed, NewConfirmed, GlobalNewConfirmed], ["Country Total Confirmed", "Global Total Confirmed", "Country New Confirmed", "Global New Confirmed"]);
+
         });
 
     // On search button click
@@ -49,17 +52,18 @@ $(document).ready(function () {
         TotalConfirmed = covidQuery.Countries[idx].TotalConfirmed;
         countryCode = covidQuery.Countries[idx].CountryCode;
         NewConfirmed = covidQuery.Countries[idx].NewConfirmed;
-        GlobalNewConfirmed = covidQuery.Global.NewConfirmed;
-        GlobalTotalConfirmed = covidQuery.Global.TotalConfirmed;
         // Not alike data
         // graphData("global-chart", [TotalConfirmed, NewConfirmed], ["Country Total Confirmed", "Country New Confirmed"]);
         // graphData("country-chart", [GlobalNewConfirmed, GlobalTotalConfirmed], ["Global New Confirmed", "Global Total Confirmed"]);
         // Alike data
-        graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed], ["Country New Confirmed", "Global New Confirmed"]);
-        graphData("country-chart", [NewConfirmed, GlobalNewConfirmed], ["Country Total Confirmed", "Global Total Confirmed"]);
+
+        graphData("global-chart", [TotalConfirmed, GlobalTotalConfirmed, NewConfirmed, GlobalNewConfirmed], ["Country Total Confirmed", "Global Total Confirmed", "Country New Confirmed", "Global New Confirmed"]);
+
         getCountryPopulation(countryCode);
 
     })
+
+
 
     // Call to get global population
     // function getGlobalPop() {
@@ -186,10 +190,10 @@ $(document).ready(function () {
     /***************************************
      * Button control for Symptom description
      ***************************************/
-    $('.activate').on('click', function() {
+    $('.activate').on('click', function () {
         $('.modal').addClass('is-active');
     });
-    $('.modal-close').on('click', function() {
+    $('.modal-close').on('click', function () {
         $('.modal').removeClass('is-active');
     });
 
