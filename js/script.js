@@ -34,7 +34,16 @@ $(document).ready(function () {
             }
 
             $("#country").autocomplete({
-                source: countriesList
+                source: countriesList,
+                change: function (event, ui) {
+                    if (!ui.item) {
+                        //http://api.jqueryui.com/autocomplete/#event-change -
+                        // The item selected from the menu, if any. Otherwise the property is null
+                        //so clear the item for force selection
+                        $("#country").val("");
+                        $("#country").attr("placeholder", "Please Select a Country from the drop down list.");
+                    }
+                }
             });
 
             // getGlobalPop(); // disabled to hardcode population
