@@ -1,24 +1,9 @@
 # covidTracking
-
-## Project Checklist
-
-## Title
-
-Covid Tracking
+[link to site](https://clydeclark.github.io/covidTracking/)
 
 ## Description
 
-Web application that allows you to see your nation's Covid statistics.
-
-## User Story
-
-```
-AS A concerned citizen
-I WANT to see my nation's statistics for Covid-19
-SO THAT I can plan a trip accordingly
-```
-
-## Sketch
+This is a web application that allows you to see your nation's Covid statistics.  In a time of such unrest and fear about Covid, this team decided to create a way to alleviate those strains by creating this app!  Now the user can keep up to date on exactly how their country is fairing in the war against this insane virus.
 
 ![design](imgs/sketch.png)
 
@@ -37,10 +22,6 @@ SO THAT I can plan a trip accordingly
 
   - [Bootstrap](https://getbootstrap.com/)
   - [Bulma](https://bulma.io/)
-
-## Breakdown of Tasks
-
-Individual tasks will be delegated as they arise to allow each member to work on all aspects of the project.
 
 ## Credits
 
